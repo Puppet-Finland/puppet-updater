@@ -15,6 +15,12 @@ class updater::cron
 {
     include updater::params
 
+    # cron-apt bundles a cron.d fragment, which need to get rid off
+    file { 'updater-cron-apt':
+        name => '/etc/cron.d/cron-apt',
+        ensure => absent,
+    }
+
     cron { 'updater-cron':
         command => $::updater::params::updater_cron_command,
         user => root,
