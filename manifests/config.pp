@@ -3,19 +3,21 @@
 #
 # Configure automated updates
 #
-class updater::config(
+class updater::config
+(
+    $install,
     $email
 )
 {
-    include updater::params
-
-    file { 'updater-config':
-        ensure => present,
-        name => $updater::params::updater_config,
-        owner => root,
-        group => root,
-        mode  => 644,
-        content => template("updater/${::osfamily}.erb"),
-        require => Class['updater::install'],
+    # The logic required for RedHat and Debian is quite different and therefore 
+    # handled in separate classes.
+    if $::osfamily == 'RedHat' {
+        class { 'updater::config::redhat':
+            install => $install,
+        }
+    } elsif $::osfamily == 'Debian' {
+        class { 'updater::config::debian':
+            install => $install,
+        }
     }
 }

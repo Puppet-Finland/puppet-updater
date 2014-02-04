@@ -6,6 +6,9 @@
 #
 # == Parameters
 #
+# [*install*]
+#   Install updates automatically. Valid values 'yes' and 'no'. Defaults to 
+#   'no'.
 # [*email*]
 #   Address for notification emails. Defaults to $::serveradmin.
 # [*hour*]
@@ -35,6 +38,7 @@
 #
 class updater
 (
+    $install = 'no',
     $email = $::serveradmin,
     $hour = '3',
     $minute = '15',
@@ -48,6 +52,7 @@ if hiera('manage_updater', 'true') != 'false' {
     include updater::install
 
     class { 'updater::config':
+        install => $install,
         email => $email,
     }
 
