@@ -1,1 +1,1 @@
-dist-upgrade -y
+-y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
