@@ -7,7 +7,7 @@ class updater::config::redhat
 (
     $install
 )
-
+{
     if $install == 'yes' {
         $check_only = 'no'
         $download_only = 'no'
