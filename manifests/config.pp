@@ -6,7 +6,8 @@
 class updater::config
 (
     $install,
-    $email
+    $email,
+    $mailon
 )
 {
     # The logic required for RedHat and Debian is quite different and therefore 
@@ -18,6 +19,7 @@ class updater::config
     } elsif $::osfamily == 'Debian' {
         class { 'updater::config::debian':
             install => $install,
+            mailon => $mailon,
         }
     }
 }

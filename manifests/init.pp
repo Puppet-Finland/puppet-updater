@@ -11,6 +11,10 @@
 #   'no'.
 # [*email*]
 #   Address for notification emails. Defaults to $::serveradmin.
+# [*mailon*]
+#   When cron-apt sends mail. Valid values '' (never), ''error', 'upgrade', 
+#   'changes', 'output' and 'always'. Defaults to 'upgrade'. More details in 
+#   config.erb.
 # [*hour*]
 #   Hour(s) when the agent gets run. Defaults to 3 (all hours). Only affects 
 #   Debian-based operating systems and cron-apt.
@@ -40,6 +44,7 @@ class updater
 (
     $install = 'no',
     $email = $::serveradmin,
+    $mailon = 'upgrade',
     $hour = '3',
     $minute = '15',
     $weekday = '*'
@@ -54,6 +59,7 @@ if hiera('manage_updater', 'true') != 'false' {
     class { 'updater::config':
         install => $install,
         email => $email,
+        mailon => $mailon,
     }
 
     # cron-apt (Debian) requires setting up a cron entry

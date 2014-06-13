@@ -5,7 +5,8 @@
 #
 class updater::config::debian
 (
-    $install
+    $install,
+    $mailon
 )
 {
     file { 'updater-5-dist-upgrade':
