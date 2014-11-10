@@ -10,7 +10,7 @@
 #   Install updates automatically. Valid values 'yes' and 'no'. Defaults to 
 #   'no'.
 # [*email*]
-#   Address for notification emails. Defaults to $::serveradmin.
+#   Address for notification emails. Defaults to $::servermonitor.
 # [*mailon*]
 #   When cron-apt sends mail. Valid values '' (never), ''error', 'upgrade', 
 #   'changes', 'output' and 'always'. Defaults to 'upgrade'. More details in 
@@ -43,7 +43,7 @@
 class updater
 (
     $install = 'no',
-    $email = $::serveradmin,
+    $email = $::servermonitor,
     $mailon = 'upgrade',
     $hour = '3',
     $minute = '15',
