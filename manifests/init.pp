@@ -27,9 +27,9 @@
 #
 # == Examples
 #
-# class { 'updater':
-#   email => 'monitor@domain.com',
-# }
+#   class { 'updater':
+#       email => 'monitor@domain.com',
+#   }
 #
 # == Authors
 #
@@ -37,8 +37,7 @@
 #
 # == License
 #
-# BSD-lisence
-# See file LICENSE for details
+# BSD-license. See file LICENSE for details.
 #
 class updater
 (
