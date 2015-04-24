@@ -6,6 +6,9 @@
 #
 # == Parameters
 #
+# [*manage*]
+#   Whether to manage automatic updates with Puppet or not. Valid values are 
+#   'yes' (default) and 'no'.
 # [*install*]
 #   Install updates automatically. Valid values 'yes' and 'no'. Defaults to 
 #   'no'.
@@ -41,6 +44,7 @@
 #
 class updater
 (
+    $manage = 'yes',
     $install = 'no',
     $email = $::servermonitor,
     $mailon = 'upgrade',
@@ -50,23 +54,22 @@ class updater
 )
 {
 
-# Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_updater', 'true') != 'false' {
+if $manage == 'yes' {
 
-    include updater::install
+    include ::updater::install
 
-    class { 'updater::config':
+    class { '::updater::config':
         install => $install,
-        email => $email,
-        mailon => $mailon,
+        email   => $email,
+        mailon  => $mailon,
     }
 
     # cron-apt (Debian) requires setting up a cron entry
     # yum-cron (RedHat) packages setup cron-daily entries automatically
     if $::osfamily == 'Debian' {
-        class { 'updater::cron':
-            hour => $hour,
-            minute => $minute,
+        class { '::updater::cron':
+            hour    => $hour,
+            minute  => $minute,
             weekday => $weekday,
         }
     }

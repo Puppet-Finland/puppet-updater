@@ -1,0 +1,12 @@
+{
+  "name": "puppetfinland-updater",
+  "version": "0.5.1",
+  "author": "Puppet-Finland team",
+  "license": "BSD license",
+  "summary": "Setup updater",
+  "source": "https://github.com/Puppet-Finland/updater.git",
+  "project_page": "https://github.com/Puppet-Finland/updater",
+  "dependencies": [
+    { "name": "puppetfinland/os", "version_requirement": ">= 0.5.5" }
+  ]
+}

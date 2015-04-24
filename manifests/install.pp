@@ -3,12 +3,10 @@
 #
 # Install the package required for automated updates
 #
-class updater::install {
-
-    include updater::params
+class updater::install inherits updater::params {
 
     package { 'updater':
         ensure => present,
-        name => $::updater::params::updater_package,
-	}
+        name   => $::updater::params::updater_package,
+  }
 }

@@ -5,6 +5,8 @@
 #
 class updater::params {
 
+    include ::os::params
+
     case $::osfamily {
         'RedHat': {
             $updater_package = 'yum-cron'
@@ -14,8 +16,7 @@ class updater::params {
             $updater_cron_command = '/usr/sbin/cron-apt'
         }
         default: {
-            $updater_package = 'cron-apt'
-            $updater_cron_command = '/usr/sbin/cron-apt'
+            fail("Unsupported operating system ${::osfamily}!")
         }
     }
 }

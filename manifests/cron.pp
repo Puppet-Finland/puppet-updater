@@ -11,21 +11,21 @@ class updater::cron
     $hour,
     $minute,
     $weekday
-)
-{
-    include updater::params
 
+) inherits updater::params
+{
     # cron-apt bundles a cron.d fragment, which need to get rid off
     file { 'updater-cron-apt':
-        name => '/etc/cron.d/cron-apt',
         ensure => absent,
+        name   => '/etc/cron.d/cron-apt',
     }
 
     cron { 'updater-cron':
+        ensure  => present,
         command => $::updater::params::updater_cron_command,
-        user => root,
-        hour => $hour,
-        minute => $minute,
+        user    => root,
+        hour    => $hour,
+        minute  => $minute,
         weekday => $weekday,
     }
 
