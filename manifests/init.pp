@@ -19,8 +19,8 @@
 #   'changes', 'output' and 'always'. Defaults to 'upgrade'. More details in 
 #   config.erb.
 # [*hour*]
-#   Hour(s) when the agent gets run. Defaults to 3 (all hours). Only affects 
-#   Debian-based operating systems and cron-apt.
+#   Hour(s) when the agent gets run. Defaults to 3. Only affects Debian-based 
+#   operating systems and cron-apt.
 # [*minute*]
 #   Minute(s) when the agent gets run. Defaults to 15. Only affects Debian-based 
 #   operating systems and cron-apt.
