@@ -8,7 +8,7 @@
 #
 # [*manage*]
 #   Whether to manage automatic updates with Puppet or not. Valid values are 
-#   'yes' (default) and 'no'.
+#   true (default) and false.
 # [*install*]
 #   Install updates automatically. Valid values 'yes' and 'no'. Defaults to 
 #   'no'.
@@ -44,7 +44,7 @@
 #
 class updater
 (
-    $manage = 'yes',
+    $manage = true,
     $install = 'no',
     $email = $::servermonitor,
     $mailon = 'upgrade',
@@ -54,7 +54,9 @@ class updater
 )
 {
 
-if $manage == 'yes' {
+validate_bool($manage)
+
+if $manage {
 
     include ::updater::install
 
