@@ -4,21 +4,32 @@ A Puppet module for managing automated updates
 
 # Module usage
 
-* [Class: updater](manifests/init.pp)
-* [Class: updater::cron](manifests/cron.pp)
+Download but do not install updates:
 
-# Dependencies
+  include ::updater
 
-See [metadata.json](metadata.json).
+or
 
-# Operating system support
+  class { '::updater':
+    install => 'no',
+  }
 
-This module has been tested on
+Automatically download and install updates:
 
-* Debian 7 and 8
-* Ubuntu 12.04 and 14.04
-* CentOS 6
+  class { '::updater':
+    install => 'yes',
+  }
 
-Other Linux distributions should work with small modifications.
+The "mailon" parameter determines when to send notification emails: '' means 
+never, 'error' means only on errors and 'upgrade' means on every upgrade.
 
-For details see [params.pp](manifests/params.pp).
+On Debian the update cronjob can be customized like this:
+
+  class { '::updater':
+    hour    => 4,
+    minute  => 35,
+    weekday => '*',
+  }
+
+For more information see [init.pp](manifests/init.pp) and 
+[cron.pp](manifests/cron.pp).
