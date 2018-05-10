@@ -8,9 +8,9 @@
 #
 class updater::cron
 (
-    $hour,
-    $minute,
-    $weekday
+    Variant[Integer,String] $hour,
+    Variant[Integer,String] $minute,
+    Variant[Integer,String] $weekday
 
 ) inherits updater::params
 {

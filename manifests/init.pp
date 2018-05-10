@@ -15,7 +15,7 @@
 # [*email*]
 #   Address for notification emails. Defaults to $::servermonitor.
 # [*mailon*]
-#   When cron-apt sends mail. Valid values '' (never), ''error', 'upgrade', 
+#   When cron-apt sends mail. Valid values '' (never), 'error', 'upgrade',
 #   'changes', 'output' and 'always'. Defaults to 'upgrade'. More details in 
 #   config.erb.
 # [*hour*]
@@ -28,33 +28,17 @@
 #   Weekday(s) when the agent gets run. Defaults to * (all weekdays). Only 
 #   affects Debian-based operating systems and cron-apt.
 #
-# == Examples
-#
-#   class { 'updater':
-#       email => 'monitor@domain.com',
-#   }
-#
-# == Authors
-#
-# Samuli Seppänen <samuli@openvpn.net>
-#
-# == License
-#
-# BSD-license. See file LICENSE for details.
-#
 class updater
 (
-    $manage = true,
-    $install = 'no',
-    $email = $::servermonitor,
-    $mailon = 'upgrade',
-    $hour = '3',
-    $minute = '15',
-    $weekday = '*'
+    Boolean $manage = true,
+            $install = 'no',
+            $email = $::servermonitor,
+            $mailon = 'upgrade',
+            $hour = 3,
+            $minute = 15,
+            $weekday = '*'
 )
 {
-
-validate_bool($manage)
 
 if $manage {
 

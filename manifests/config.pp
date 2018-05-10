@@ -5,9 +5,9 @@
 #
 class updater::config
 (
-    $install,
-    $email,
-    $mailon
+    Enum['yes','no']           $install,
+    String                     $email,
+    Enum['','error','upgrade'] $mailon
 
 ) inherits updater::params
 {

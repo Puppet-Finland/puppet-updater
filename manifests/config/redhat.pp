@@ -5,7 +5,7 @@
 #
 class updater::config::redhat
 (
-    $install
+    Enum['yes','no'] $install
 
 ) inherits updater::params
 {

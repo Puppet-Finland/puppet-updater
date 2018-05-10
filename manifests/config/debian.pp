@@ -5,8 +5,8 @@
 #
 class updater::config::debian
 (
-    $install,
-    $mailon
+    Enum['yes','no']           $install,
+    Enum['','error','upgrade'] $mailon
 
 ) inherits updater::params
 {
