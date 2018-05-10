@@ -1,6 +1,6 @@
 {
   "name": "puppetfinland-updater",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Puppet-Finland team",
   "summary": "Configure automated system package updates (apt-cron/yum-cron)",
   "license": "BSD-2-Clause",
