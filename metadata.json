@@ -2,7 +2,7 @@
   "name": "puppetfinland-updater",
   "version": "1.0.0",
   "author": "Puppet-Finland team",
-  "license": "BSD license",
+  "license": "BSD-2-Clause",
   "summary": "Setup updater",
   "source": "https://github.com/Puppet-Finland/updater.git",
   "project_page": "https://github.com/Puppet-Finland/updater",
