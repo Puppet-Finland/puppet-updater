@@ -10,20 +10,18 @@ class updater::config::redhat
 ) inherits updater::params
 {
     if $install == 'yes' {
-        $check_only = 'no'
-        $download_only = 'no'
+        $apply_updates = 'yes'
     } else {
-        $check_only = 'no'
-        $download_only = 'yes'
+        $apply_updates = 'no'
     }
 
     file { 'updater-config':
         ensure  => present,
-        name    => '/etc/sysconfig/yum-cron',
+        name    => '/etc/yum/yum-cron.conf',
         owner   => $::os::params::adminuser,
         group   => $::os::params::admingroup,
         mode    => '0644',
-        content => template('updater/yum-cron.erb'),
+        content => template('updater/yum-cron.conf.erb'),
         require => Class['updater::install'],
     }
 }
