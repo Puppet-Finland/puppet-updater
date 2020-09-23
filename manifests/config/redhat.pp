@@ -26,7 +26,6 @@ class updater::config::redhat
 
     if $::updater::params::has_service {
         service { 'dnf-automatic':
-            ensure    => 'running',
             enable    => true,
             subscribe => File['updater-config'],
         }
