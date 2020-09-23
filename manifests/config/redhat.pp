@@ -17,11 +17,19 @@ class updater::config::redhat
 
     file { 'updater-config':
         ensure  => present,
-        name    => '/etc/yum/yum-cron.conf',
+        name    => $::updater::params::config_name,
         owner   => $::os::params::adminuser,
         group   => $::os::params::admingroup,
         mode    => '0644',
-        content => template('updater/yum-cron.conf.erb'),
+        content => template($::updater::params::template_name),
         require => Class['updater::install'],
+    }
+
+    if $::updater::params::has_service {
+        service { 'dnf-automatic':
+            ensure    => 'running',
+            enable    => true,
+            subscribe => File['updater-config'],
+        }
     }
 }
