@@ -1,7 +1,5 @@
 #
-# == Class: updater::config::debian
-#
-# Debian-specific updater (cron-apt) configuration
+# @summary Debian-specific updater (cron-apt) configuration
 #
 class updater::config::debian
 (

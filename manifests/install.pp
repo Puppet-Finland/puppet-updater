@@ -1,7 +1,5 @@
 #
-# == Class: updater::install
-#
-# Install the package required for automated updates
+# @summary Install the package required for automated updates
 #
 class updater::install inherits updater::params {
 

@@ -1,10 +1,9 @@
 #
-# == Class: updater::cron
-#
-# Add automated updates to cron. This class is currently only used on 
-# Debian-based operating systems that use cron-apt; RedHat's yum-cron package 
-# sets up cron.daily entries automatically without giving any configuration 
-# options.
+# @summary
+#   Add automated updates to cron. This class is currently only used on
+#   Debian-based operating systems that use cron-apt; RedHat operating systems
+#   set up cron entries automatically or use a system service for launching
+#   upgrades.
 #
 class updater::cron
 (

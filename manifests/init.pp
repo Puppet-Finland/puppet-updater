@@ -1,20 +1,18 @@
 #
-# == Class: updater
+# @summary
+#   Configure automatic updates using the default/common tools for the
+#   operating system.
 #
-# Configure automatic updates. Currently only downloads updates but does not 
-# install them.
-#
-# == Parameters
-#
-# [*manage*]
-#   Whether to manage automatic updates with Puppet or not. Valid values are 
-#   true (default) and false.
-# [*install*]
-#   Install updates automatically. Valid values 'yes' and 'no'. Defaults to 
-#   'no'.
-# [*email*]
-#   Address for notification emails. Defaults to $::servermonitor.
-# [*mailon*]
+# @param manage
+#   Whether to manage automatic updates with Puppet or not.
+# @param install
+#   Install updates automatically
+# @param upgrade_type
+#   Type of upgrade to do. For best compatibility only 'default' (all upgrades)
+#   and 'security' are supported. Only applicable on RHEL/CentOS/Fedora.
+# @param email
+#   Address for notification emails.
+# @param mailon
 #   When cron-apt sends mail. Valid values '' (never), 'error', 'upgrade',
 #   'changes', 'output' and 'always'. Defaults to 'upgrade'. More details in 
 #   config.erb.
@@ -30,13 +28,14 @@
 #
 class updater
 (
-    Boolean $manage = true,
-            $install = 'no',
-            $email = $::servermonitor,
-            $mailon = 'upgrade',
-            $hour = 3,
-            $minute = 15,
-            $weekday = '*'
+    Boolean                      $manage = true,
+    Enum['yes', 'no']            $install = 'no',
+    Enum['default', 'security']  $upgrade_type = 'default',
+    String                       $email = $::servermonitor,
+    Enum['', 'error', 'upgrade'] $mailon = 'upgrade',
+    Variant[Array[String], Array[Integer[0-23]], String, Integer[0-23]] $hour = 3,
+    Variant[Array[String], Array[Integer[0-23]], String, Integer[0-23]] $minute = 15,
+    Variant[Array[String], Array[Integer[0-23]], String, Integer[0-23]] $weekday = '*'
 )
 {
 
@@ -45,9 +44,10 @@ if $manage {
     include ::updater::install
 
     class { '::updater::config':
-        install => $install,
-        email   => $email,
-        mailon  => $mailon,
+        install      => $install,
+        upgrade_type => $upgrade_type,
+        email        => $email,
+        mailon       => $mailon,
     }
 
     # cron-apt (Debian) requires setting up a cron entry

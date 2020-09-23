@@ -1,11 +1,10 @@
 #
-# == Class: updater::config::redhat
-#
-# RedHat-specific updater (yum-cron) configuration
+# @summary RedHat-specific updater configuration
 #
 class updater::config::redhat
 (
-    Enum['yes','no'] $install
+    Enum['yes','no']            $install,
+    Enum['default', 'security'] $upgrade_type
 
 ) inherits updater::params
 {

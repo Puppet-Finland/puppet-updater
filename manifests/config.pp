@@ -5,9 +5,10 @@
 #
 class updater::config
 (
-    Enum['yes','no']           $install,
-    String                     $email,
-    Enum['','error','upgrade'] $mailon
+    Enum['yes','no']            $install,
+    Enum['default', 'security'] $upgrade_type,
+    String                      $email,
+    Enum['','error','upgrade']  $mailon
 
 ) inherits updater::params
 {
@@ -15,7 +16,8 @@ class updater::config
     # handled in separate classes.
     if $::osfamily == 'RedHat' {
         class { '::updater::config::redhat':
-            install => $install,
+            install      => $install,
+            upgrade_type => $upgrade_type,
         }
     } elsif $::osfamily == 'Debian' {
         class { '::updater::config::debian':
